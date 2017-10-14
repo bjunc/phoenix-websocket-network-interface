@@ -46,7 +46,7 @@ Defaults to WebSocket with automatic LongPoll fallback in the browser, and w3cwe
 
 Log socket and channel info to console.  If `options.logger` function is not set, default is used.
 
-### `logger: Function`
+#### `logger: Function`
 
 Logging function.  Default:
 

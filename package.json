@@ -1,0 +1,13 @@
+{
+  "name": "phoenix-websocket-network-interface",
+  "version": "0.1.0",
+  "description": "Apollo network interfacing for communication with Phoenix (using Absinthe) over websockets",
+  "main": "src/phoenix-websocket-network-interface.js",
+  "repository": "git@github.com:bjunc/phoenix-websocket-network-interface.git",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "graphql": "^0.11.7",
+    "phoenix": "^1.3.0"
+  }
+}

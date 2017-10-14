@@ -1,11 +1,14 @@
 import { print } from 'graphql/language/printer'
 import { Socket as PhoenixSocket } from 'phoenix'
+let W3CWebSocket = require('websocket').w3cwebsocket
 
 export class PhoenixWebSocketNetworkInterface {
 	constructor (opts) {
 		let defaultLogger = (kind, msg, data) => console.log(`phoenix apollo \n\t ${kind}: ${msg}`, data)
 		// TODO: support callback for logger
 		if (opts.logger === true) opts.logger = defaultLogger
+		// user node-based websocket when in server mode (ssr)
+		if (opts.ssr === true) opts.transport = opts.transport || W3CWebSocket
 		let socket = new PhoenixSocket(opts.uri, opts)
 		try {
 			socket.connect()

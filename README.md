@@ -8,14 +8,16 @@ Currently supports request/response queries and mutations over socket in both br
 
 ```javascript
 import { createPhoenixWebSocketNetworkInterface } from 'phoenix-websocket-network-interface'
+import ApolloClient from 'apollo-client'
 
 let options = {
   uri: 'ws://localhost:4000/socket',
-  params: { jwt }
+  params: { token: 'ABCDEF123456' }
   logger: true
 }
 
-let networkInterface = createPhoenixWebSocketNetworkInterface(options)
+const networkInterface = createPhoenixWebSocketNetworkInterface(options)
+const client = new ApolloClient({ networkInterface })
 
 ```
 
@@ -33,7 +35,7 @@ Example: `ws://localhost:4000/socket`
 
 Parameters to be sent to your socket connection.  See [Phoenix.js hexdocs](https://hexdocs.pm/phoenix/js/).  One example would be to pass a JWT, which can be used by Guardian to verify permissions to connect.
 
-### `ssr : Boolean`
+#### `ssr : Boolean`
 
 If true, node-based w3cwebsocket transport will be used to prevent `window` errors while running on a server.  You can override the transport with the `transport` option.
 

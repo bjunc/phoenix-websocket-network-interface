@@ -2,7 +2,7 @@
   "name": "phoenix-websocket-network-interface",
   "version": "0.1.2",
   "description": "Apollo network interface for communication with Phoenix (using Absinthe) over websockets",
-  "main": "src/phoenix-websocket-network-interface.js",
+  "main": "dist/phoenix-websocket-network-interface.js",
   "repository": "git@github.com:bjunc/phoenix-websocket-network-interface.git",
   "author": "",
   "license": "MIT",

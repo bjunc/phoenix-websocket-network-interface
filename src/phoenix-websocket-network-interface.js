@@ -1,6 +1,6 @@
 import { print } from 'graphql/language/printer'
 import { Socket as PhoenixSocket } from 'phoenix'
-let W3CWebSocket = require('websocket').w3cwebsocket
+import { w3cwebsocket as W3CWebSocket } from 'websocket'
 
 export class PhoenixWebSocketNetworkInterface {
 	constructor (opts) {

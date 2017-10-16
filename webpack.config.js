@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+    target: 'node',
     entry: './src/phoenix-websocket-network-interface.js',
     output: {
         path: path.resolve(__dirname, 'dist'),

@@ -6,7 +6,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'phoenix-websocket-network-interface.js',
         library: 'PhoenixWebSocketNetworkInterface',
-        libraryTarget: 'umd'
+        libraryTarget: 'commonjs2'
     },
     module: {
         rules: [

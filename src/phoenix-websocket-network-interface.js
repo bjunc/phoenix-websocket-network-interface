@@ -7,8 +7,8 @@ export class PhoenixWebSocketNetworkInterface {
 		let defaultLogger = (kind, msg, data) => console.log(`phoenix apollo \n\t ${kind}: ${msg}`, data)
 		// Enable debugging
 		opts.debug === true ? opts.logger = opts.logger || defaultLogger : opts.logger = null
-		// user node-based websocket when in server mode (ssr)
-		if (opts.ssr === true) opts.transport = opts.transport || W3CWebSocket
+		// user node-based websocket when running on a server (eg. SSR)
+		if (typeof window === 'undefined' && !opts.transport) opts.transport = W3CWebSocket
 		let socket = new PhoenixSocket(opts.uri, opts)
 		try {
 			socket.connect()

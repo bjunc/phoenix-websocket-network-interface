@@ -1,6 +1,6 @@
 {
   "name": "phoenix-websocket-network-interface",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "Apollo network interface for communication with Phoenix (using Absinthe) over websockets",
   "main": "dist/phoenix-websocket-network-interface.js",
   "module": "src/phoenix-websocket-network-interface.js",

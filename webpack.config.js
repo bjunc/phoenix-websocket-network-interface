@@ -7,5 +7,10 @@ module.exports = {
         filename: 'phoenix-websocket-network-interface.js',
         library: 'PhoenixWebSocketNetworkInterface',
         libraryTarget: 'umd'
+    },
+    module: {
+        rules: [
+            {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
+        ]
     }
 }

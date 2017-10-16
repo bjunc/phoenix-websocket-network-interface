@@ -75,75 +75,102 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (immutable) */ __webpack_exports__["createPhoenixWebSocketNetworkInterface"] = createPhoenixWebSocketNetworkInterface;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_language_printer__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_language_printer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_graphql_language_printer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_phoenix__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_phoenix___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_phoenix__);
 
 
-let W3CWebSocket = __webpack_require__(4).w3cwebsocket
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.PhoenixWebSocketNetworkInterface = undefined;
 
-class PhoenixWebSocketNetworkInterface {
-	constructor (opts) {
-		let defaultLogger = (kind, msg, data) => console.log(`phoenix apollo \n\t ${kind}: ${msg}`, data)
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+exports.createPhoenixWebSocketNetworkInterface = createPhoenixWebSocketNetworkInterface;
+
+var _printer = __webpack_require__(1);
+
+var _phoenix = __webpack_require__(3);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var W3CWebSocket = __webpack_require__(4).w3cwebsocket;
+
+var PhoenixWebSocketNetworkInterface = function () {
+	function PhoenixWebSocketNetworkInterface(opts) {
+		_classCallCheck(this, PhoenixWebSocketNetworkInterface);
+
+		var defaultLogger = function defaultLogger(kind, msg, data) {
+			return console.log('phoenix apollo \n\t ' + kind + ': ' + msg, data);
+		};
 		// Enable debugging
-		opts.debug === true ? opts.logger = opts.logger || defaultLogger : opts.logger = null
+		opts.debug === true ? opts.logger = opts.logger || defaultLogger : opts.logger = null;
 		// user node-based websocket when in server mode (ssr)
-		if (opts.ssr === true) opts.transport = opts.transport || W3CWebSocket
-		let socket = new __WEBPACK_IMPORTED_MODULE_1_phoenix__["Socket"](opts.uri, opts)
+		if (opts.ssr === true) opts.transport = opts.transport || W3CWebSocket;
+		var socket = new _phoenix.Socket(opts.uri, opts);
 		try {
-			socket.connect()
-			this._joinChannel(socket)
+			socket.connect();
+			this._joinChannel(socket);
 		} catch (err) {
-			console.error(err)
+			console.error(err);
 		}
 	}
 
-	_joinChannel (socket) {
-		const CHANNEL_TOPIC = '__absinthe__:control'
-		let channel = socket.channel(CHANNEL_TOPIC, {})
-		this._channel = channel
-		channel.join()
-		// TODO: wrap channel join in promise for error catching/reporting
-	}
+	_createClass(PhoenixWebSocketNetworkInterface, [{
+		key: '_joinChannel',
+		value: function _joinChannel(socket) {
+			var CHANNEL_TOPIC = '__absinthe__:control';
+			var channel = socket.channel(CHANNEL_TOPIC, {});
+			this._channel = channel;
+			channel.join();
+			// TODO: wrap channel join in promise for error catching/reporting
+		}
 
-	// Required by the NetworkInterface interface spec
-	query ({ operationName, query, variables }) {
-		query = Object(__WEBPACK_IMPORTED_MODULE_0_graphql_language_printer__["print"])(query)
-		// console.log('Phoenix apollo \n\t query:', query)
-		return new Promise((resolve, reject) => {
-			this._channel.push('doc', { operationName, query, variables })
-				.receive('ok', resolve)
-				.receive('ignore', resolve)
-				.receive('error', reject)
-				.receive('timeout', reject)
-		})
-	}
+		// Required by the NetworkInterface interface spec
 
-	// TODO: support middleware
-	use (middlewares) {
-		console.warning('Middleware is not supported at this time.')
-		return this
-	}
+	}, {
+		key: 'query',
+		value: function query(_ref) {
+			var _this = this;
 
-	// TODO: support afterware
-	useAfter (afterwares) {
-		console.warning('Afterware is not supported at this time.')
-		return this
-	}
+			var operationName = _ref.operationName,
+			    _query = _ref.query,
+			    variables = _ref.variables;
+
+			_query = (0, _printer.print)(_query);
+			// console.log('Phoenix apollo \n\t query:', query)
+			return new Promise(function (resolve, reject) {
+				_this._channel.push('doc', { operationName: operationName, query: _query, variables: variables }).receive('ok', resolve).receive('ignore', resolve).receive('error', reject).receive('timeout', reject);
+			});
+		}
+
+		// TODO: support middleware
+
+	}, {
+		key: 'use',
+		value: function use(middlewares) {
+			console.warning('Middleware is not supported at this time.');
+			return this;
+		}
+
+		// TODO: support afterware
+
+	}, {
+		key: 'useAfter',
+		value: function useAfter(afterwares) {
+			console.warning('Afterware is not supported at this time.');
+			return this;
+		}
+	}]);
+
+	return PhoenixWebSocketNetworkInterface;
+}();
+
+exports.PhoenixWebSocketNetworkInterface = PhoenixWebSocketNetworkInterface;
+function createPhoenixWebSocketNetworkInterface(opts) {
+	return new PhoenixWebSocketNetworkInterface(opts);
 }
-/* harmony export (immutable) */ __webpack_exports__["PhoenixWebSocketNetworkInterface"] = PhoenixWebSocketNetworkInterface;
-
-
-function createPhoenixWebSocketNetworkInterface (opts) {
-	return new PhoenixWebSocketNetworkInterface(opts)
-}
-
 
 /***/ }),
 /* 1 */
